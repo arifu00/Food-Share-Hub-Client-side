@@ -96,7 +96,7 @@ const Nav = () => {
                   size="sm"
                   className="hidden lg:inline-block"
                 >
-                  <span>Log In</span>
+                  <span>Login</span>
                 </Button>
               </div>
               <IconButton
@@ -142,7 +142,7 @@ const Nav = () => {
             {navList}
             <div className="flex items-center gap-x-1">
               <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Log In</span>
+                <span>Login</span>
               </Button>
             </div>
           </MobileNav>
