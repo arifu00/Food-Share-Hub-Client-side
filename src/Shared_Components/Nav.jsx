@@ -4,11 +4,20 @@ import {
   Typography,
   Button,
   IconButton,
+  Avatar,
+  Menu,
+  MenuHandler,
+  MenuList,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import {} from "@material-tailwind/react";
+
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import logo from '../assets/logo/logo.jpg'
+import logo from "../assets/logo/logo.jpg";
+import { AuthContext } from "../Provider/AuthProvider";
 const Nav = () => {
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user);
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
@@ -17,7 +26,15 @@ const Nav = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col font-medium text-base gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li className="p-1 hover:text-lg hover:font-bold hover:text-[#85B935] ">
@@ -67,10 +84,9 @@ const Nav = () => {
             isPending ? "pending" : isActive ? "text-[#85B935]" : ""
           }
         >
-           My Food Request
+          My Food Request
         </NavLink>
       </li>
-      
     </ul>
   );
   return (
@@ -79,25 +95,79 @@ const Nav = () => {
         <div className="container mx-auto">
           <div className="flex items-center justify-between text-blue-gray-900">
             <div className="flex items-center gap-4">
-                <img className="rounded-full w-16 h-16" src={logo} alt="" />
-            <Typography
-              as="a"
-              href="#"
-              className="text-[#363636] cursor-pointer py-1.5 font-bold text-3xl "
-            >
-              Food <span className="text-lg">Share Hub</span>
-            </Typography>
+              <img className="rounded-full w-16 h-16" src={logo} alt="" />
+              <Typography
+                as="a"
+                href="#"
+                className="text-[#363636] cursor-pointer py-1.5 font-bold text-3xl "
+              >
+                Food <span className="text-lg">Share Hub</span>
+              </Typography>
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
+              {/* check User  */}
               <div className="flex items-center gap-x-1">
-                <Button
-                  variant="gradient"
-                  size="sm"
-                  className="hidden lg:inline-block"
-                >
-                 <NavLink to='/login'><span>Login</span></NavLink>
-                </Button>
+                {user ? (
+                  <Menu
+                    open={isMenuOpen}
+                    handler={setIsMenuOpen}
+                    placement="bottom-end"
+                  >
+                    <MenuHandler>
+                      <Button
+                        variant="text"
+                        color="blue-gray"
+                        className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+                      >
+                        <Avatar
+                          variant="circular"
+                          size="sm"
+                          alt="tania andrew"
+                          className="border border-gray-900 p-0.5"
+                          src={
+                            user?.photoURL
+                              ? user?.photoURL
+                              : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                          }
+                        />
+                      </Button>
+                    </MenuHandler>
+                    <MenuList className="p-1 max-w-96 px-12 py-3 mt-7 rounded-lg">
+                      <h3 className="mt-4 text-center text-lg text-black ">
+                        Welcome Back {user.displayName}
+                      </h3>
+                      <ul className="pl-2 space-y-4 mt-4 text-base font-medium">
+                        <li>
+                          <a className="hover:underline " href="#">
+                            My Profile
+                          </a>
+                        </li>
+                        <li>
+                          <a className="hover:underline" href="#">
+                            Edit Profile
+                          </a>
+                        </li>
+                        <li
+                          onClick={handleLogOut}
+                          className="hover:underline cursor-pointer"
+                        >
+                          Log Out
+                        </li>
+                      </ul>
+                    </MenuList>
+                  </Menu>
+                ) : (
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block"
+                  >
+                    <NavLink to="/login">
+                      <span>Login</span>
+                    </NavLink>
+                  </Button>
+                )}
               </div>
               <IconButton
                 variant="text"
@@ -138,13 +208,8 @@ const Nav = () => {
               </IconButton>
             </div>
           </div>
-          <MobileNav open={openNav}>
+          <MobileNav className="text-black" open={openNav}>
             {navList}
-            <div className="flex items-center gap-x-1">
-              <Button fullWidth variant="gradient" size="sm" className="">
-                <NavLink to='/login'><span>Login</span></NavLink>
-              </Button>
-            </div>
           </MobileNav>
         </div>
       </Navbar>

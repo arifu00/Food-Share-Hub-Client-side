@@ -2,20 +2,33 @@ import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import loginImg from "../../assets/login/Login.gif";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
-    console.log(email);
+    const password = form.password.value;
+    // console.log(email);
+
+    // firebase login
+    loginUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="container mx-auto flex justify-center gap-4 my-12 ">
       <div className="md:flex justify-center gap-8">
         <div className="flex items-center">
           <img className="" src={loginImg} alt="" />
-          
         </div>
         <Card
           color="transparent"
@@ -36,7 +49,7 @@ const Login = () => {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
-                Your Email 
+                Your Email
               </Typography>
               <Input
                 size="lg"

@@ -7,8 +7,14 @@ import {
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import registrationImg from "../../assets/register/register.gif";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import auth from "../../firebase.config";
+import { updateProfile } from "firebase/auth";
 
 const Registration = () => {
+  const { createUser } = useContext(AuthContext);
+  // console.log(createUser);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,7 +23,30 @@ const Registration = () => {
     const password = form.password.value;
     const photo = form.photo.value;
     // const checkbox = form.checkbox.checked;
-    console.log(name, email, password, photo);
+
+    // console.log(name, email, password, photo);
+
+    // create user with firebase
+
+    createUser(email, password)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        updateProfile(auth.currentUser,{
+            displayName: name,
+            photoURL: photo,
+          })
+          .then(() => {
+            // User information updated successfully
+            console.log("User created with name and photo:", user);
+          })
+          .catch((error) => {
+            console.error("Error updating user information:", error.message);
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="container mx-auto flex justify-center gap-4 my-12 ">
@@ -30,10 +59,14 @@ const Registration = () => {
           shadow={false}
           className="border p-10 shadow-xl border-blue-gray-200 "
         >
-          <Typography variant="h4" className="text-center text-2xl font-black" color="blue-gray">
+          <Typography
+            variant="h4"
+            className="text-center text-2xl font-black"
+            color="blue-gray"
+          >
             Register
           </Typography>
-        
+
           <form
             onSubmit={handleRegister}
             className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -114,7 +147,10 @@ const Registration = () => {
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
               Already have an account?{" "}
-              <NavLink to="/login" className=" underline text-red-500 font-bold">
+              <NavLink
+                to="/login"
+                className=" underline text-red-500 font-bold"
+              >
                 Login
               </NavLink>
             </Typography>
