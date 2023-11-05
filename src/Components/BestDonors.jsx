@@ -12,7 +12,7 @@ import {
 } from "swiper/modules";
 
 const BestDonors = () => {
-  const [doners, setDoners] = useState(null);
+  const [doners, setDoners] = useState([]);
   console.log(doners);
   useEffect(() => {
     fetch("DonerData.json")
@@ -92,3 +92,6 @@ const BestDonors = () => {
 };
 
 export default BestDonors;
+
+
+

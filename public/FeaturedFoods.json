@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "foodImage": "https://i.ibb.co/kHR7BWG/biriyani.jpg",
+        "foodName": "Biriyani",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/mSfbDS1/user2.jpg",
+            "donatorName": "John Doe"
+        },
+        "foodQuantity": 40,
+        "pickupLocation": "Dhaka, Bangladesh",
+        "expiredDate": "2023-12-15",
+        "additionalNotes": "Spicy and delicious!"
+    },
+    {
+        "id": 2,
+        "foodImage": "https://i.ibb.co/G9vRdCS/pizza.jpg",
+        "foodName": "Pizza",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/bmWq5VV/user6.jpg",
+            "donatorName": "Alice Smith"
+        },
+        "foodQuantity": 20,
+        "pickupLocation": "Chittagong, Bangladesh",
+        "expiredDate": "2023-12-12",
+        "additionalNotes": "Freshly baked pizza."
+    },
+    {
+        "id": 3,
+        "foodImage": "https://i.ibb.co/sy2PxwK/khichuri.jpg",
+        "foodName": "Khichuri",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/jZjqSYJ/user5.jpg",
+            "donatorName": "Michael Johnson"
+        },
+        "foodQuantity": 60,
+        "pickupLocation": "Khulna, Bangladesh",
+        "expiredDate": "2023-12-20",
+        "additionalNotes": "Mild and comforting."
+    },
+    {
+        "id": 4,
+        "foodImage": "https://i.ibb.co/BjdNCzL/pasta.jpg",
+        "foodName": "Pasta",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/WWdVLqM/user3.jpg",
+            "donatorName": "Emily Davis"
+        },
+        "foodQuantity": 90,
+        "pickupLocation": "Rajshahi, Bangladesh",
+        "expiredDate": "2023-12-18",
+        "additionalNotes": "Homemade goodness."
+    },
+    {
+        "id": 5,
+        "foodImage": "https://i.ibb.co/YkSSvZx/pitha.jpg",
+        "foodName": "Pitha",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/CMH98hD/user1.jpg",
+            "donatorName": "Robert Wilson"
+        },
+        "foodQuantity": 80,
+        "pickupLocation": "Sylhet, Bangladesh",
+        "expiredDate": "2023-12-25",
+        "additionalNotes": "Traditional sweet treats."
+    },
+    {
+        "id": 6,
+        "foodImage": "https://i.ibb.co/XYzWMhZ/tikka.jpg",
+        "foodName": "Chicken Tikka",
+        "donator": {
+            "donatorImage": "https://i.ibb.co/k9vkn4h/user4.jpg",
+            "donatorName": "Sara Khan"
+        },
+        "foodQuantity": 50,
+        "pickupLocation": "Barisal, Bangladesh",
+        "expiredDate": "2023-12-22",
+        "additionalNotes": "Spicy and flavorful."
+    }
+]
