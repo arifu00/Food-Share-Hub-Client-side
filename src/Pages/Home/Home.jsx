@@ -1,15 +1,14 @@
 import Banner from "../../Components/Banner";
 import BestDonors from "../../Components/BestDonors";
-import loadingImg from "../../assets/loading/loading.gif";
+import ContactCard from "../../Components/ContactCard";
+import HelpOther from "../../Components/HelpOther";
 const Home = () => {
   return (
     <div>
-     <Banner></Banner>
-     <BestDonors></BestDonors>
-      <div className="text-red-700">Ami aci vhai, apni koi</div>
-      <div className="flex justify-center">
-        <img src={loadingImg} alt="" />
-      </div>
+      <Banner></Banner>
+      <HelpOther></HelpOther>
+      <BestDonors></BestDonors>
+      <ContactCard></ContactCard>
     </div>
   );
 };

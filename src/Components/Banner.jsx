@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -17,10 +17,10 @@ import banner4 from "../assets/banner/banner4.jpg";
 const Banner = () => {
   const bannerBtn = (
     <>
-      <button className="text-lg font-semibold px-4 py-3 rounded-md bg-[#FF3811] hover:bg-[#50C1EC] mr-5">
+      <button className="text-sm lg:text-lg font-medium md:font-semibold px-1 md:px-4 py-2 md:py-3 rounded-md bg-[#FF3811] hover:bg-[#50C1EC] mr-5">
         Explore More
       </button>
-      <button className="text-lg font-semibold px-4 py-3 rounded-md bg-transparent outline-white outline hover:bg-[#FF3811] hover:outline-0 hover:text-black">
+      <button className="text-sm lg:text-lg font-medium md:font-semibold px-1 md:px-4 py-2 md:py-3 rounded-md bg-transparent outline-white outline hover:bg-[#FF3811] hover:outline-0 hover:text-black">
         Donate Food
       </button>
     </>
@@ -37,24 +37,24 @@ const Banner = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+
+        modules={[Autoplay, Pagination]}
         className="mySwiper "
       >
         {/* slider-1  */}
         <SwiperSlide>
-          <div className="lg:h-[550px] flex justify-center">
+          <div className=" lg:h-[550px] flex justify-center">
             <img
-              className="w-full object-cover rounded-lg"
+              className="w-full lg:object-cover rounded-lg"
               src={banner1}
               alt=""
             />
             <div className="absolute flex items-center h-full left-0 top-0 rounded-xl bg-gradient-to-r from-[#151515] to-rgba(21, 21, 21, 0.00)  ">
-              <div className="text-white w-1/2 pl-8 space-y-7 md:pl-20">
-                <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <div className="text-white md:w-1/2 py-4 pl-8 md:space-y-7 md:pl-20">
+                <h2 className="text-xl md:text-4xl lg:text-6xl font-bold">
                   Join the Food Share Revolution
                 </h2>
-                <p className="text-lg font-normal">
+                <p className="text-xs lg:text-lg font-normal my-2">
                   Join our food share initiative to foster a sense of community
                   and make a positive impact on local hunger.
                 </p>
@@ -68,11 +68,11 @@ const Banner = () => {
           <div className="lg:h-[550px] flex justify-center">
             <img className="w-full rounded-lg" src={banner2} alt="" />
             <div className="absolute flex items-center h-full left-0 top-0 rounded-xl bg-gradient-to-r from-[#151515] to-rgba(21, 21, 21, 0.00)  ">
-              <div className="text-white w-1/2 pl-8 space-y-7 md:pl-20">
-                <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <div className="text-white md:w-1/2 py-4 pl-8 md:space-y-7 md:pl-20">
+                <h2 className="text-xl md:text-4xl lg:text-6xl font-bold">
                   Food for All, All for Food!
                 </h2>
-                <p className="text-lg font-normal">
+                <p className="text-xs lg:text-lg font-normal my-2">
                   Our food donation program is a lifeline for those in need,
                   ensuring no one goes to bed hungry.
                 </p>
@@ -86,11 +86,11 @@ const Banner = () => {
           <div className="lg:h-[550px] flex justify-center">
             <img className="w-full  rounded-lg" src={banner3} alt="" />
             <div className="absolute flex items-center h-full left-0 top-0 rounded-xl bg-gradient-to-r from-[#151515] to-rgba(21, 21, 21, 0.00)  ">
-              <div className="text-white w-1/2 pl-8 space-y-7 md:pl-20">
-                <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <div className="text-white md:w-1/2 py-4 pl-8 md:space-y-7 md:pl-20">
+                <h2 className="text-xl md:text-4xl lg:text-6xl font-bold">
                   Help Us Fight Hunger in Your Community 🤝
                 </h2>
-                <p className="text-lg font-normal">
+                <p className="text-xs lg:text-lg font-normal my-2">
                   Our food donation program is a beacon of hope for those in
                   need.
                 </p>
@@ -108,11 +108,11 @@ const Banner = () => {
               alt=""
             />
             <div className="absolute flex items-center h-full left-0 top-0 rounded-xl bg-gradient-to-r from-[#151515] to-rgba(21, 21, 21, 0.00)  ">
-              <div className="text-white w-1/2 pl-8 space-y-7 md:pl-20">
-                <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <div className="text-white md:w-1/2 py-4 pl-8 md:space-y-7 md:pl-20">
+                <h2 className="text-xl md:text-4xl lg:text-6xl font-bold">
                   Share the Bounty, Spread the Kindness
                 </h2>
-                <p className="text-lg font-normal">
+                <p className="text-xs lg:text-lg font-normal my-2">
                   Join our food donation efforts and become a part of something
                   bigger than yourself.
                 </p>

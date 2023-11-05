@@ -59,7 +59,7 @@ const BestDonors = () => {
           >
             {doners?.map((donor) => (
               <SwiperSlide key={donor.id}>
-                <div className="bg-[#FFFFFF] rounded-2xl shadow-xl w-96">
+                <div className="bg-[#FFFFFF] rounded-2xl shadow-xl ml-4">
                   <div className="flex justify-center">
                     <img
                       className="rounded-full w-[200px] h-[200px] mt-16 border-2 border-blue-300"
