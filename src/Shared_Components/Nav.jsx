@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user);
@@ -29,10 +30,14 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogOut = () => {
+    const toastId = toast.loading("Loading ...");
     logOut()
-      .then(() => {})
+      .then(() => {
+        toast.success("Log Out Successful", { id: toastId });
+      })
       .catch((error) => {
         console.log(error);
+        toast.error(`${error.message}`, { id: toastId });
       });
   };
   const navList = (

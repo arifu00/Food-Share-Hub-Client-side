@@ -1,12 +1,16 @@
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import loginImg from "../../assets/login/Login.gif";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, googleSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,14 +18,33 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log(email);
+    const toastId = toast.loading("Logging in ...");
 
     // firebase login
     loginUser(email, password)
       .then((res) => {
         console.log(res.user);
+        toast.success("Login Successful", { id: toastId });
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((error) => {
         console.log(error.message);
+        toast.error(`Login Failed ${error.message}`, { id: toastId });
+      });
+  };
+  // google sign in
+  const provider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    const toastId = toast.loading("Logging in ...");
+    googleSignIn(provider)
+      .then((res) => {
+        console.log(res.user);
+        toast.success("Login Successful", { id: toastId });
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        toast.error(`Login failed. ${error.message}`, { id: toastId });
       });
   };
   return (
@@ -82,7 +105,10 @@ const Login = () => {
               Or Login With
             </h5>
             <div className="text-center">
-              <button className="p-2 bg-[#F5F5F8]  hover:bg-blue-100 my-3 hover:text-red-400 text-6xl rounded-full">
+              <button
+                onClick={handleGoogleLogin}
+                className="p-2 bg-[#F5F5F8]  hover:bg-blue-100 my-3 hover:text-red-400 text-6xl rounded-full"
+              >
                 <AiFillGoogleCircle></AiFillGoogleCircle>
               </button>
             </div>

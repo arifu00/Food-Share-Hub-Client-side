@@ -5,16 +5,19 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import registrationImg from "../../assets/register/register.gif";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import auth from "../../firebase.config";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const { createUser } = useContext(AuthContext);
   // console.log(createUser);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -27,15 +30,17 @@ const Registration = () => {
     // console.log(name, email, password, photo);
 
     // create user with firebase
-
+    const toastId = toast.loading("Logging in ...");
+    navigate(location?.state ? location?.state : "/");
     createUser(email, password)
       .then((res) => {
         const user = res.user;
         console.log(user);
-        updateProfile(auth.currentUser,{
-            displayName: name,
-            photoURL: photo,
-          })
+        toast.success("Register Successful", { id: toastId });
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
           .then(() => {
             // User information updated successfully
             console.log("User created with name and photo:", user);
@@ -46,6 +51,7 @@ const Registration = () => {
       })
       .catch((error) => {
         console.log(error.message);
+        toast.error(error.message, { id: toastId });
       });
   };
   return (
