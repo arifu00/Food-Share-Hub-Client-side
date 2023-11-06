@@ -18,6 +18,38 @@ const FoodDetail = () => {
   const food = useLoaderData();
   //   console.log(food);
   const { user } = useContext(AuthContext);
+
+  //   handle request food
+  const handleRequestFood = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    console.log(form);
+
+    const foodName = form.foodName.value;
+    const foodImage = form.foodImage.value;
+    const donatorName = form.donatorName.value;
+    const donatorEmail = form.donatorEmail.value;
+    const userEmail = form.userEmail.value;
+    const requestDate = form.requestDate.value;
+    const pickupLocation = form.pickupLocation.value;
+    const expiredDate = form.expiredDate.value;
+    const additionalNotes = form.additionalNotes.value;
+    const donationMoney = form.donationMoney.value;
+
+    const foodRequest = {
+      foodName,
+      foodImage,
+      donatorName,
+      donatorEmail,
+      userEmail,
+      requestDate,
+      pickupLocation,
+      expiredDate,
+      additionalNotes,
+      donationMoney,
+    };
+    console.log(foodRequest);
+  };
   return (
     <div className="bg-[#F5F5F5] p-10">
       <div className="container mx-auto px-2 md:px-5 my-5 ">
@@ -43,143 +75,161 @@ const FoodDetail = () => {
                   className="bg-transparent shadow-none"
                 >
                   <Card className="mx-auto ">
-                    <CardBody className="flex flex-col gap-4">
-                      <Typography
-                        variant="h4"
-                        color="blue-gray"
-                        className="text-center"
-                      >
-                        Request Food
-                      </Typography>
-                      <Typography
-                        className="mb-3 font-normal text-center"
-                        variant="paragraph"
-                        color="gray"
-                      >
-                        You can donate some money ?
-                      </Typography>
+                    <form onSubmit={handleRequestFood}>
+                      <CardBody className="flex flex-col gap-4">
+                        <Typography
+                          variant="h4"
+                          color="blue-gray"
+                          className="text-center"
+                        >
+                          Request Food
+                        </Typography>
+                        <Typography
+                          className="mb-3 font-normal text-center"
+                          variant="paragraph"
+                          color="gray"
+                        >
+                          You can donate some money ?
+                        </Typography>
 
-                      {/* 1st line */}
-                      <div className="flex justify-center gap-4 w-full">
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            Food Name
-                          </Typography>
-                          <Input
-                            defaultValue={food.foodName}
-                            size="lg"
-                            readOnly
-                          />
+                        {/* 1st line */}
+                        <div className="flex justify-center gap-4 w-full">
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Food Name
+                            </Typography>
+                            <Input
+                              defaultValue={food.foodName}
+                              size="lg"
+                              name="foodName"
+                              readOnly
+                            />
+                          </div>
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Food Image
+                            </Typography>
+                            <Input
+                              defaultValue={food.foodImage}
+                              size="lg"
+                              name="foodImage"
+                              readOnly
+                            />
+                          </div>
                         </div>
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            Food Image
-                          </Typography>
-                          <Input
-                            defaultValue={food.foodImage}
-                            size="lg"
-                            readOnly
-                          />
+                        {/* 2nd line */}
+                        <div className="flex justify-center gap-4 w-full">
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Donator Name
+                            </Typography>
+                            <Input
+                              defaultValue={food.donatorName}
+                              size="lg"
+                              name="donatorName"
+                              readOnly
+                            />
+                          </div>
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Donator Email
+                            </Typography>
+                            <Input
+                              defaultValue={
+                                food?.email ? food.email : "user@gmail.com"
+                              }
+                              name="donatorEmail"
+                              size="lg"
+                              readOnly
+                            />
+                          </div>
                         </div>
-                      </div>
-                      {/* 2nd line */}
-                      <div className="flex justify-center gap-4 w-full">
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            Donator Name
-                          </Typography>
-                          <Input
-                            defaultValue={food.donatorName}
-                            size="lg"
-                            readOnly
-                          />
+                        {/* 3rd line */}
+                        <div className="flex justify-center gap-4 w-full">
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              User Email
+                            </Typography>
+                            <Input
+                              defaultValue={user.email}
+                              size="lg"
+                              name="userEmail"
+                              readOnly
+                            />
+                          </div>
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Request Date
+                            </Typography>
+                            <Input
+                              defaultValue={new Date().toLocaleString()}
+                              size="lg"
+                              name="requestDate"
+                              readOnly
+                            />
+                          </div>
                         </div>
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            Donator Email
-                          </Typography>
-                          <Input
-                            defaultValue={food?.email ? food.email : 'user@gmail.com'}
-                            size="lg"
-                            readOnly
-                          />
+                        {/* 4th line */}
+                        <div className="flex justify-center gap-4 w-full">
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Pickup Location
+                            </Typography>
+                            <Input
+                              defaultValue={food.pickupLocation}
+                              size="lg"
+                              name="pickupLocation"
+                              readOnly
+                            />
+                          </div>
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Expire Date
+                            </Typography>
+                            <Input
+                              defaultValue={food.expiredDate}
+                              name="expiredDate"
+                              size="lg"
+                              readOnly
+                            />
+                          </div>
                         </div>
-                      </div>
-                      {/* 3rd line */}
-                      <div className="flex justify-center gap-4 w-full">
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            User Name
-                          </Typography>
-                          <Input
-                            defaultValue={user.email}
-                            size="lg"
-                            readOnly
-                          />
+                        {/* 5th line */}
+                        <div className="flex justify-center gap-4 w-full">
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Additional Notes
+                            </Typography>
+                            <Input
+                              label="Additional Notes"
+                              name="additionalNotes"
+                              size="lg"
+                            />
+                          </div>
+                          <div className="w-full">
+                            <Typography className="" variant="h6">
+                              Donation Money
+                            </Typography>
+                            <Input
+                              label="Donation Money"
+                              name="donationMoney"
+                              size="lg"
+                              type="number"
+                            />
+                          </div>
                         </div>
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                            Request Date
-                          </Typography>
-                          <Input
-                            defaultValue={new Date().toLocaleString()}
-                            size="lg"
-                            readOnly
-                          />
-                        </div>
-                      </div>
-                      {/* 4th line */}
-                      <div className="flex justify-center gap-4 w-full">
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                          Pickup Location
-                          </Typography>
-                          <Input
-                            defaultValue={food.pickupLocation}
-                            size="lg"
-                            readOnly
-                          />
-                        </div>
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                          Expire Date
-                          </Typography>
-                          <Input
-                            defaultValue={food.expiredDate}
-                            size="lg"
-                            readOnly
-                          />
-                        </div>
-                      </div>
-                      {/* 5th line */}
-                      <div className="flex justify-center gap-4 w-full">
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                          Pickup Location
-                          </Typography>
-                          <Input
-                            defaultValue={food.pickupLocation}
-                            size="lg"
-                            readOnly
-                          />
-                        </div>
-                        <div className="w-full">
-                          <Typography className="" variant="h6">
-                          Expire Date
-                          </Typography>
-                          <Input
-                            defaultValue={food.expiredDate}
-                            size="lg"
-                            readOnly
-                          />
-                        </div>
-                      </div>
-                    </CardBody>
-                    <CardFooter className="pt-0">
-                      <Button variant="gradient" onClick={handleOpen} fullWidth>
-                        Request Food
-                      </Button>
-                    </CardFooter>
+                      </CardBody>
+                      <CardFooter className="pt-0">
+                        <Button
+                          variant="gradient"
+                          type="submit"
+                          onClick={handleOpen}
+                          fullWidth
+                        >
+                          Request Food
+                        </Button>
+                      </CardFooter>
+                    </form>
                   </Card>
                 </Dialog>
                 {/* model close */}
