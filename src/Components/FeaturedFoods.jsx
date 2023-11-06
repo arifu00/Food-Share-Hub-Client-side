@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const FeaturedFoods = () => {
   const [foods, setFoods] = useState([]);
@@ -66,17 +67,17 @@ const FeaturedFoods = () => {
             </CardBody>
             <CardFooter className="flex items-center justify-between">
               <div className="flex items-center ">
-                <Tooltip content={food.donator.donatorName}>
+                <Tooltip content={food.donatorName}>
                   <Avatar
                     size="lg"
                     variant="circular"
-                    alt={food.donator.donatorName}
-                    src={food.donator.donatorImage}
+                    alt={food.donatorName}
+                    src={food.donatorImage}
                     className="border-2 border-white hover:z-10 cursor-pointer"
                   />
                 </Tooltip>
               </div>
-              <button className="flex items-center gap-3 cursor-pointer font-medium text-xl hover:text-[#D59B2D]">
+              <button className="flex items-center gap-3 cursor-pointer font-medium text-xl hover:text-[#D59B2D] bg-amber-300 px-4 py-2 rounded-lg hover:bg-[#494a4b]">
                 <h6>More</h6>
                 <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
               </button>
@@ -86,7 +87,7 @@ const FeaturedFoods = () => {
       </div>
       <div className="text-center mt-20">
         <button className="text-lg font-semibold px-4 py-3 rounded-lg text-[#D59B2D] border-2 border-[#D59B2D] hover:text-white hover:bg-[#FF3811] hover:border-0 ">
-          All Foods
+         <Link to='/availableFoods'>All Foods</Link> 
         </button>
       </div>
     </div>
