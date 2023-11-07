@@ -5,14 +5,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import banner1 from "../assets/banner/banner1.jpg";
 import banner2 from "../assets/banner/banner2.jpg";
 import banner3 from "../assets/banner/banner3.jpg";
 import banner4 from "../assets/banner/banner4.jpg";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const bannerBtn = (
@@ -20,9 +20,11 @@ const Banner = () => {
       <button className="text-sm lg:text-lg font-medium md:font-semibold px-1 md:px-4 py-2 md:py-3 rounded-md bg-[#FF3811] hover:bg-[#50C1EC] mr-5">
         Explore More
       </button>
-      <button className="text-sm lg:text-lg font-medium md:font-semibold px-1 md:px-4 py-2 md:py-3 rounded-md bg-transparent outline-white outline hover:bg-[#FF3811] hover:outline-0 hover:text-black">
-        Donate Food
-      </button>
+      <Link to="/addFood">
+        <button className="text-sm lg:text-lg font-medium md:font-semibold px-1 md:px-4 py-2 md:py-3 rounded-md bg-transparent outline-white outline hover:bg-[#FF3811] hover:outline-0 hover:text-black">
+          Donate Food
+        </button>
+      </Link>
     </>
   );
   return (
@@ -37,7 +39,6 @@ const Banner = () => {
         pagination={{
           clickable: true,
         }}
-
         modules={[Autoplay, Pagination]}
         className="mySwiper "
       >

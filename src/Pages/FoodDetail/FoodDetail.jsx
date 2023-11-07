@@ -136,7 +136,7 @@ const FoodDetail = () => {
                             </Typography>
                             <Input
                               defaultValue={
-                                food?.email ? food.email : "user@gmail.com"
+                                food?.donatorEmail ? food.donatorEmail : "user@gmail.com"
                               }
                               name="donatorEmail"
                               size="lg"

@@ -13,7 +13,7 @@ import {
 
 const BestDonors = () => {
   const [doners, setDoners] = useState([]);
-  console.log(doners);
+  // console.log(doners);
   useEffect(() => {
     fetch("DonerData.json")
       .then((res) => res.json())
@@ -37,12 +37,12 @@ const BestDonors = () => {
         <div className="">
           <Swiper 
             autoplay={{
-              delay: 3000,
+              delay: 1000,
               disableOnInteraction: false,
             }}
             effect="coverflow"
             grabCursor={true}
-            centeredSlides={true}
+            centeredSlides={false}
             slidesPerView="3"
             loop={true}
             coverflowEffect={{

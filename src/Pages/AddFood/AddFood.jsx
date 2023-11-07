@@ -2,15 +2,18 @@ import { Button, Card, Input, Typography } from "@material-tailwind/react";
 
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
-//   console.log(user);
+  const axios = useAxios();
+  //   console.log(user);
   const handleAddFood = (e) => {
     e.preventDefault();
     const form = e.target;
     const foodName = form.foodName.value;
-    const foodImg = form.foodImg.value;
+    const foodImage = form.foodImg.value;
     const foodQuantity = form.foodQuantity.value;
     const pickupLocation = form.pickupLocation.value;
     const expiredDate = form.expiredDate.value;
@@ -18,7 +21,7 @@ const AddFood = () => {
 
     const addFood = {
       foodName,
-      foodImg,
+      foodImage,
       foodQuantity,
       pickupLocation,
       expiredDate,
@@ -27,9 +30,17 @@ const AddFood = () => {
         ? user?.photoURL
         : "https://i.ibb.co/bmWq5VV/user6.jpg",
       donatorName: user?.displayName,
+      donatorEmail: user?.email,
       foodStatus: "Available",
     };
     console.log(addFood);
+    const toastId = toast.loading("Please wait ...");
+    axios.post("/foods", addFood).then((res) => {
+      console.log();
+      if (res.data.insertedId) {
+        toast.success("Your Donate Successful", { id: toastId });
+      }
+    });
   };
   return (
     <div className="my-20 flex justify-center items-center">

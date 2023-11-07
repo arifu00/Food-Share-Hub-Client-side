@@ -9,13 +9,12 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
-
 import { BiSolidSearch } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import Skeleton from "react-loading-skeleton";
+import SkeletonEffect from "../../Components/SkeletonEffect/SkeletonEffect";
 
 
 const AvailableFoods = () => {
@@ -39,20 +38,10 @@ const AvailableFoods = () => {
   console.log(isLoading, isError, foods);
   if (isLoading) {
      return <div className="container mx-auto px-4 my-8">
-     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-       {[...Array(9)].map( index =>  <div key={index} className="overflow-hidden shadow-xl">
-              <div className="p-4">
-                <Skeleton className="mx-4 my-2" height={200} />
-                <Skeleton className="mx-4 my-2" height={20} width="80%" style={{ margin: '12px 0' }} />
-                <Skeleton className="mx-4 my-2" height={20} width="90%" />
-                <Skeleton className="mx-4 my-2" height={20} width="70%" style={{ margin: '8px 0' }} />
-                <Skeleton className="mx-4 my-2" height={20} width="80%" />
-                <Skeleton className="mx-4 my-2" height={20} width="60%" style={{ margin: '8px 0' }} />
-                <Skeleton className="mx-4 my-2" height={20} width="85%" />
-              </div>
-            </div>)}
+   
+       <SkeletonEffect></SkeletonEffect>
      </div>
-   </div>
+
   }
   return (
     <div className="">
