@@ -9,45 +9,60 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+
 import { BiSolidSearch } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import Skeleton from "react-loading-skeleton";
+
 
 const AvailableFoods = () => {
-  const [foods, setFoods] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const axios = useAxios();
   // console.log(searchTerm);
 
-  // console.log(foods);
-  useEffect(() => {
-    fetch("http://localhost:5000/foods")
-      .then((res) => res.json())
-      .then((data) => setFoods(data));
-  }, []);
-
-  // searchbar manage
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    // console.log(e.target.value);
+  const getFoods = async () => {
+    const res = await axios.get("/foods");
+    return res;
   };
 
-  const filteredFoods = foods?.filter((food) => {
-    return food.foodName.toLowerCase().includes(searchTerm.toLowerCase());
+  const {
+    data: foods,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["food"],
+    queryFn: getFoods,
   });
 
-  // console.log(filteredFoods);
-
+  console.log(isLoading, isError, foods);
+  if (isLoading) {
+     return <div className="container mx-auto px-4 my-8">
+     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+       {[...Array(9)].map( index =>  <div key={index} className="overflow-hidden shadow-xl">
+              <div className="p-4">
+                <Skeleton className="mx-4 my-2" height={200} />
+                <Skeleton className="mx-4 my-2" height={20} width="80%" style={{ margin: '12px 0' }} />
+                <Skeleton className="mx-4 my-2" height={20} width="90%" />
+                <Skeleton className="mx-4 my-2" height={20} width="70%" style={{ margin: '8px 0' }} />
+                <Skeleton className="mx-4 my-2" height={20} width="80%" />
+                <Skeleton className="mx-4 my-2" height={20} width="60%" style={{ margin: '8px 0' }} />
+                <Skeleton className="mx-4 my-2" height={20} width="85%" />
+              </div>
+            </div>)}
+     </div>
+   </div>
+  }
   return (
     <div className="">
-      {/* top search and filter  */}
       <div className="mt my-4 bg-[#F5F5F5] py-3">
+        {/* top search and filter  */}
         <div className="container  mx-auto px-2 flex justify-center items-center gap-12">
           {/* search  */}
           <div className="w-72">
             <Input
-              onChange={handleSearchChange}
+              // onChange={handleSearchChange}
               label="Search Food"
               icon={<BiSolidSearch></BiSolidSearch>}
             />
@@ -70,94 +85,88 @@ const AvailableFoods = () => {
         {/* foods  */}
         <div className="container mx-auto px-4 my-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredFoods.length > 0 ? (
-              filteredFoods.map((food) => (
-                <Card key={food.id} className=" overflow-hidden shadow-xl ">
-                  <CardHeader
-                    shadow={true}
-                    color="transparent"
-                    className="m-0 rounded-none"
+            {foods?.data.map((food) => (
+              <Card key={food.id} className=" overflow-hidden shadow-xl ">
+                <CardHeader
+                  shadow={true}
+                  color="transparent"
+                  className="m-0 rounded-none"
+                >
+                  <img
+                    src={food.foodImage}
+                    alt={food.foodName}
+                    className="h-72 w-full object-cover"
+                  />
+                </CardHeader>
+                <CardBody className="h-[250px]">
+                  <Typography variant="h4" className="text-[#D59B2D]">
+                    || {food.foodName} ||
+                  </Typography>
+                  <Typography
+                    variant="lead"
+                    color="gray"
+                    className="mt-3 font-medium"
                   >
-                    <img
-                      src={food.foodImage}
-                      alt={food.foodName}
-                      className="h-72 w-full object-cover"
-                    />
-                  </CardHeader>
-                  <CardBody className="h-[250px]">
-                    <Typography variant="h4" className="text-[#D59B2D]">
-                      || {food.foodName} ||
-                    </Typography>
-                    <Typography
-                      variant="lead"
-                      color="gray"
-                      className="mt-3 font-medium"
+                    <span className="font-bold text-[#6E7C90]">
+                      Food Taste:
+                    </span>{" "}
+                    {food.additionalNotes}
+                  </Typography>
+                  <Typography
+                    variant="lead"
+                    color="gray"
+                    className="font-medium"
+                  >
+                    <span className="font-bold text-[#6E7C90]">
+                      Expired Date:
+                    </span>{" "}
+                    {food.expiredDate}
+                  </Typography>
+                  <Typography
+                    variant="lead"
+                    color="gray"
+                    className="font-medium"
+                  >
+                    <span className="font-bold text-[#6E7C90]">
+                      Food Quantity :
+                    </span>{" "}
+                    <strong>{food.foodQuantity}</strong> person to be served
+                  </Typography>
+                  <Typography
+                    variant="lead"
+                    color="gray"
+                    className="font-medium"
+                  >
+                    <span className="font-bold text-[#6E7C90]">
+                      Pickup Location:
+                    </span>{" "}
+                    {food.pickupLocation}
+                  </Typography>
+                </CardBody>
+                <CardFooter className="flex items-center justify-between">
+                  <div className="flex items-center ">
+                    <Tooltip content={food.donatorName}>
+                      <Avatar
+                        size="lg"
+                        variant="circular"
+                        alt={food.donatorName}
+                        src={food.donatorImage}
+                        className="border-2 border-white hover:z-10 cursor-pointer"
+                      />
+                    </Tooltip>
+                  </div>
+                  <button className=" cursor-pointer font-medium text-xl hover:text-[#D59B2D] bg-amber-300 px-4 py-2 rounded-lg hover:bg-[#494a4b]">
+                    <Link
+                      className="flex items-center gap-3"
+                      to={`/food/${food._id}`}
                     >
-                      <span className="font-bold text-[#6E7C90]">
-                        Food Taste:
-                      </span>{" "}
-                      {food.additionalNotes}
-                    </Typography>
-                    <Typography
-                      variant="lead"
-                      color="gray"
-                      className="font-medium"
-                    >
-                      <span className="font-bold text-[#6E7C90]">
-                        Expired Date:
-                      </span>{" "}
-                      {food.expiredDate}
-                    </Typography>
-                    <Typography
-                      variant="lead"
-                      color="gray"
-                      className="font-medium"
-                    >
-                      <span className="font-bold text-[#6E7C90]">
-                        Food Quantity :
-                      </span>{" "}
-                      <strong>{food.foodQuantity}</strong> person to be served
-                    </Typography>
-                    <Typography
-                      variant="lead"
-                      color="gray"
-                      className="font-medium"
-                    >
-                      <span className="font-bold text-[#6E7C90]">
-                        Pickup Location:
-                      </span>{" "}
-                      {food.pickupLocation}
-                    </Typography>
-                  </CardBody>
-                  <CardFooter className="flex items-center justify-between">
-                    <div className="flex items-center ">
-                      <Tooltip content={food.donatorName}>
-                        <Avatar
-                          size="lg"
-                          variant="circular"
-                          alt={food.donatorName}
-                          src={food.donatorImage}
-                          className="border-2 border-white hover:z-10 cursor-pointer"
-                        />
-                      </Tooltip>
-                    </div>
-                    <button className=" cursor-pointer font-medium text-xl hover:text-[#D59B2D] bg-amber-300 px-4 py-2 rounded-lg hover:bg-[#494a4b]">
-                      <Link
-                        className="flex items-center gap-3"
-                        to={`/food/${food._id}`}
-                      >
-                        <h6>More</h6>
-                        <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
-                      </Link>
-                    </button>
-                  </CardFooter>
-                </Card>
-              ))
-            ) : (
-              <div className="text-center col-span-3">
-                <p className=" text-red-500 font-bold ">No Food Match</p>
-              </div>
-            )}
+                      <h6>More</h6>
+                      <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
+                    </Link>
+                  </button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
