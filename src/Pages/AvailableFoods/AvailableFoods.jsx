@@ -19,7 +19,7 @@ import SkeletonEffect from "../../Components/SkeletonEffect/SkeletonEffect";
 
 const AvailableFoods = () => {
   const axios = useAxios();
-  // console.log(searchTerm);
+ 
 
   const getFoods = async () => {
     const res = await axios.get("/foods");

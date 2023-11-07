@@ -19,8 +19,9 @@ const FoodDetail = () => {
   const food = useLoaderData();
   //   console.log(food);
   const { user } = useContext(AuthContext);
-  const axios = useAxios()
+  const axios = useAxios();
 
+  // console.log();
   //   handle request food
   const handleRequestFood = (e) => {
     e.preventDefault();
@@ -36,7 +37,7 @@ const FoodDetail = () => {
     const pickupLocation = form.pickupLocation.value;
     const expiredDate = form.expiredDate.value;
     const additionalNotes = form.additionalNotes.value;
-    const donationMoney = form.donationMoney.value;
+    const donationMoney = form.donationMoney.value || 0;
 
     const foodRequest = {
       foodName,
@@ -50,15 +51,15 @@ const FoodDetail = () => {
       additionalNotes,
       donationMoney,
       id: food._id,
+      foodStatus: food.foodStatus || 'available',
     };
     // console.log(foodRequest);
     const toastId = toast.loading("Please wait ...");
-    axios.post('/requestFood', foodRequest)
-    .then(res => {
+    axios.post("/requestFood", foodRequest).then((res) => {
       if (res.data.insertedId) {
         toast.success("Your Request has been Successful", { id: toastId });
       }
-    })
+    });
   };
   return (
     <div className="bg-[#F5F5F5] p-10">
