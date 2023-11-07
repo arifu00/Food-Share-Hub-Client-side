@@ -8,16 +8,18 @@ import {
   CardFooter,
   Typography,
   Input,
-  Checkbox,
 } from "@material-tailwind/react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
 const FoodDetail = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const food = useLoaderData();
   //   console.log(food);
   const { user } = useContext(AuthContext);
+  const axios = useAxios()
 
   //   handle request food
   const handleRequestFood = (e) => {
@@ -47,8 +49,16 @@ const FoodDetail = () => {
       expiredDate,
       additionalNotes,
       donationMoney,
+      id: food._id,
     };
-    console.log(foodRequest);
+    // console.log(foodRequest);
+    const toastId = toast.loading("Please wait ...");
+    axios.post('/requestFood', foodRequest)
+    .then(res => {
+      if (res.data.insertedId) {
+        toast.success("Your Request has been Successful", { id: toastId });
+      }
+    })
   };
   return (
     <div className="bg-[#F5F5F5] p-10">
@@ -136,7 +146,9 @@ const FoodDetail = () => {
                             </Typography>
                             <Input
                               defaultValue={
-                                food?.donatorEmail ? food.donatorEmail : "user@gmail.com"
+                                food?.donatorEmail
+                                  ? food.donatorEmail
+                                  : "user@gmail.com"
                               }
                               name="donatorEmail"
                               size="lg"
