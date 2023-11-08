@@ -55,14 +55,12 @@ const mainRoutes = createBrowserRouter([
         ),
       },
       {
-        path: "manage/:id",
+        path: "manageMyFood/:id",
         element: (
           <PrivateRoute>
             <ManageDetail></ManageDetail>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/manage/${params.id}`),
       },
       {
         path: "update/:id",

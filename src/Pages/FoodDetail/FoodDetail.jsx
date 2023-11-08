@@ -32,7 +32,7 @@ const FoodDetail = () => {
     const foodImage = form.foodImage.value;
     const donatorName = form.donatorName.value;
     const donatorEmail = form.donatorEmail.value;
-    const userEmail = form.userEmail.value;
+    const requesterEmail = form.requesterEmail.value;
     const requestDate = form.requestDate.value;
     const pickupLocation = form.pickupLocation.value;
     const expiredDate = form.expiredDate.value;
@@ -44,7 +44,9 @@ const FoodDetail = () => {
       foodImage,
       donatorName,
       donatorEmail,
-      userEmail,
+      requesterEmail,
+      requesterName: user.displayName,
+      requesterImage: user.photoURL || "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
       requestDate,
       pickupLocation,
       expiredDate,
@@ -161,12 +163,12 @@ const FoodDetail = () => {
                         <div className="flex justify-center gap-4 w-full">
                           <div className="w-full">
                             <Typography className="" variant="h6">
-                              User Email
+                              Requester Email
                             </Typography>
                             <Input
                               defaultValue={user.email}
                               size="lg"
-                              name="userEmail"
+                              name="requesterEmail"
                               readOnly
                             />
                           </div>

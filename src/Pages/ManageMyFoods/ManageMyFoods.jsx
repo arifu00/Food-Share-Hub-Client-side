@@ -114,7 +114,7 @@ const ManageMyFoods = () => {
                     </Typography>
                   </td>
                   <td className={`${classes} bg-blue-gray-50/50`}>
-                    <Link to={`/manage/${food._id}`}>
+                    <Link to={`/manageMyFood/${food._id}`}>
                       <Typography
                         variant="small"
                         color="blue-gray"

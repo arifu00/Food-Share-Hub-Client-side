@@ -51,7 +51,7 @@ const MyFoodRequest = () => {
     });
   };
 
-  // console.log(data.data);
+  // console.log(data?.data);
   if (data?.data?.length === 0) {
     return (
       <div className="container mx-auto mt-12">
