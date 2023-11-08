@@ -10,12 +10,16 @@ import { useQuery } from "@tanstack/react-query";
 import FoodReqSkeleton from "../../Components/SkeletonEffect/FoodReqSkeleton";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+
 
 const MyFoodRequest = () => {
   const axios = useAxios();
+  const { user } = useContext(AuthContext);
 
   const requestFood = async () => {
-    const res = await axios.get("/requestFood");
+    const res = await axios.get(`/requestFood?email=${user.email}`);
     return res;
   };
   const { data, isLoading, refetch } = useQuery({

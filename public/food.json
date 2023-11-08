@@ -210,14 +210,14 @@
     },
     {
         "id": 29,
-        "foodImage": "https://i.ibb.co/kgRF0n4/Chingri-Malai-Curry.jpg",
-        "foodName": "Chingri Malai Curry",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/k9vkn4h/user4.jpg",
         "donatorName": "Nasir Khan",
         "foodQuantity": 8,
         "pickupLocation": "Rangpur, Bangladesh",
         "expiredDate": "2023-12-03",
-        "additionalNotes": "Delicious Chingri Malai Curry with rice."
+        "additionalNotes": ""
     },
     {
         "id": 30,
