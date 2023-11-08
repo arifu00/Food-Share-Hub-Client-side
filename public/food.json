@@ -188,14 +188,14 @@
     },
     {
         "id": 27,
-        "foodImage": "https://i.ibb.co/Fh6zcDC/Mango-Lassi.jpg",
-        "foodName": "Mango Lassi",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/jZjqSYJ/user5.jpg",
         "donatorName": "Michael Johnson",
         "foodQuantity": 25,
         "pickupLocation": "Mymensingh, Bangladesh",
         "expiredDate": "2023-12-30",
-        "additionalNotes": "Refreshing mango lassi for everyone."
+        "additionalNotes": ""
     },
     {
         "id": 28,

@@ -27,7 +27,7 @@ const Login = () => {
     loginUser(email, password)
       .then((res) => {
         // console.log(res.user);
-        const loggedInUser = res.user;
+        // const loggedInUser = res.user;
         const user = { email };
         toast.success("Login Successful", { id: toastId });
         axios.post("/jwt", user).then((res) => {

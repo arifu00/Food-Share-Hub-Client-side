@@ -15,15 +15,15 @@ import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import SkeletonEffect from "../../Components/SkeletonEffect/SkeletonEffect";
-
+import { useState } from "react";
 
 const AvailableFoods = () => {
   document.title = "Food share ||Available Foods";
   const axios = useAxios();
- 
+  const [filter, setFilter] = useState("");
 
   const getFoods = async () => {
-    const res = await axios.get("/foods");
+    const res = await axios.get(`/foods?sortField=${filter}&&sortOrder=desc`);
     return res;
   };
 
@@ -32,18 +32,19 @@ const AvailableFoods = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["food"],
+    queryKey: ["food", filter],
     queryFn: getFoods,
   });
 
   console.log(isLoading, isError, foods);
   if (isLoading) {
-     return <div className="container mx-auto px-4 my-8">
-   
-       <SkeletonEffect></SkeletonEffect>
-     </div>
-
+    return (
+      <div className="container mx-auto px-4 my-8">
+        <SkeletonEffect></SkeletonEffect>
+      </div>
+    );
   }
+
   return (
     <div className="">
       <div className="mt my-4 bg-[#F5F5F5] py-3">
@@ -51,23 +52,24 @@ const AvailableFoods = () => {
         <div className="container  mx-auto px-2 flex justify-center items-center gap-12">
           {/* search  */}
           <div className="w-72">
-            <Input
-              // onChange={handleSearchChange}
-              label="Search Food"
-              icon={<BiSolidSearch></BiSolidSearch>}
-            />
+            <Input label="Search Food" icon={<BiSolidSearch></BiSolidSearch>} />
           </div>
           {/* filter option  */}
           <div className="w-72">
             <Select
+              onChange={(e) => setFilter(e)}
               label="Sort Method"
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
               }}
             >
-              <Option className="text-black">Food Expire Date</Option>
-              <Option className="text-black">Food Quantity</Option>
+              <Option value="expiredDate" className="text-black">
+                Food Expire Date
+              </Option>
+              <Option value="foodQuantity" className="text-black">
+                Food Quantity
+              </Option>
             </Select>
           </div>
         </div>

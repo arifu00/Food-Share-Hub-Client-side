@@ -11,18 +11,36 @@ import {
 } from "@material-tailwind/react";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
-
+import { motion } from "framer-motion";
+import SkeletonEffect from "./SkeletonEffect/SkeletonEffect";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../hooks/useAxios";
 
 const FeaturedFoods = () => {
-  const [foods, setFoods] = useState([]);
-  console.log(foods);
+  const axios = useAxios();
 
-  useEffect(() => {
-    fetch("FeaturedFoods.json")
-      .then((res) => res.json())
-      .then((data) => setFoods(data));
-  }, []);
+  const getFoods = async () => {
+    const res = await axios.get("/foods?sortField=foodQuantity&&sortOrder=desc");
+    return res;
+  };
+
+  const {
+    data,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["food",],
+    queryFn: getFoods,
+  });
+
+  console.log(isLoading, isError, );
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 my-8">
+        <SkeletonEffect></SkeletonEffect>
+      </div>
+    );
+  }
 
   const motionVariants = {
     hover: { scale: 1 },
@@ -36,12 +54,12 @@ const FeaturedFoods = () => {
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {foods.map((food) => (
+        {data?.data.slice(0, 6).map((food) => (
           <motion.div
             key={food.id}
             variants={motionVariants}
-      initial="initial"
-      whileHover="hover"
+            initial="initial"
+            whileHover="hover"
           >
             <Card className=" overflow-hidden shadow-xl ">
               <CardHeader
@@ -69,6 +87,12 @@ const FeaturedFoods = () => {
                 </Typography>
                 <Typography variant="lead" color="gray" className="font-medium">
                   <span className="font-bold text-[#6E7C90]">
+                    Food Quantity:
+                  </span>{" "}
+                  {food.foodQuantity}
+                </Typography>
+                <Typography variant="lead" color="gray" className="font-medium">
+                  <span className="font-bold text-[#6E7C90]">
                     Expired Date:
                   </span>{" "}
                   {food.expiredDate}
@@ -80,7 +104,7 @@ const FeaturedFoods = () => {
                   {food.pickupLocation}
                 </Typography>
               </CardBody>
-              <CardFooter className="flex items-center justify-between">
+              <CardFooter className="flex items-center justify-between mt-10">
                 <div className="flex items-center ">
                   <Tooltip content={food.donatorName}>
                     <Avatar
@@ -93,8 +117,13 @@ const FeaturedFoods = () => {
                   </Tooltip>
                 </div>
                 <button className="flex items-center gap-3 cursor-pointer font-medium text-xl hover:text-[#D59B2D] bg-amber-300 px-4 py-2 rounded-lg hover:bg-[#494a4b]">
-                  <h6>More</h6>
-                  <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
+                <Link
+                      className="flex items-center gap-3"
+                      to={`/food/${food._id}`}
+                    >
+                      <h6>More</h6>
+                      <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
+                    </Link>
                 </button>
               </CardFooter>
             </Card>{" "}
