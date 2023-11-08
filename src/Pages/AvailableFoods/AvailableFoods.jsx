@@ -18,6 +18,7 @@ import SkeletonEffect from "../../Components/SkeletonEffect/SkeletonEffect";
 
 
 const AvailableFoods = () => {
+  document.title = "Food share ||Available Foods";
   const axios = useAxios();
  
 

@@ -15,6 +15,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const MyFoodRequest = () => {
+  document.title = "Food share ||My Food Request";
   const axios = useAxios();
   const { user } = useContext(AuthContext);
 

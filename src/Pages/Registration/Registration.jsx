@@ -14,6 +14,7 @@ import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Registration = () => {
+  document.title = "Food share ||Registration Page";
   const { createUser } = useContext(AuthContext);
   // console.log(createUser);
   const location = useLocation();

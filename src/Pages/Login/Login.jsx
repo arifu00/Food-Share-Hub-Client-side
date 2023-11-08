@@ -6,11 +6,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
+import useAxios from "../../hooks/useAxios";
 
 const Login = () => {
+  document.title = "Food share ||Login Page";
   const { loginUser, googleSignIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const axios = useAxios();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,9 +26,16 @@ const Login = () => {
     // firebase login
     loginUser(email, password)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
+        const loggedInUser = res.user;
+        const user = { email };
         toast.success("Login Successful", { id: toastId });
-        navigate(location?.state ? location?.state : "/");
+        axios.post("/jwt", user).then((res) => {
+          console.log(res.data);
+          if (res.data.success) {
+            navigate(location?.state ? location?.state : "/");
+          }
+        });
       })
       .catch((error) => {
         // console.log(error.message);
@@ -38,9 +48,15 @@ const Login = () => {
     const toastId = toast.loading("Logging in ...");
     googleSignIn(provider)
       .then((res) => {
-        console.log(res.user);
+        console.log(res.user.email);
+        const user = { email: res.user.email };
         toast.success("Login Successful", { id: toastId });
-        navigate(location?.state ? location?.state : "/");
+        axios.post("/jwt", user).then((res) => {
+          console.log(res.data);
+          if (res.data.success) {
+            navigate(location?.state ? location?.state : "/");
+          }
+        });
       })
       .catch((error) => {
         console.log(error.message);

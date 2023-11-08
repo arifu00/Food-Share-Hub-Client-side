@@ -6,6 +6,7 @@ import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 
 const AddFood = () => {
+  document.title = "Food share ||Add Food";
   const { user } = useContext(AuthContext);
   const axios = useAxios();
   //   console.log(user);

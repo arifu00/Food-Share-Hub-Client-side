@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 const TABLE_HEAD = ["Food Name", "Manage Food", "Delete Food", "Update Food"];
 
 const ManageMyFoods = () => {
+  document.title = "Food share ||Manage My Food";
   const axios = useAxios();
   const { user } = useContext(AuthContext);
 

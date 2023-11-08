@@ -4,6 +4,7 @@ import ContactCard from "../../Components/ContactCard";
 import FeaturedFoods from "../../Components/FeaturedFoods";
 import HelpOther from "../../Components/HelpOther";
 const Home = () => {
+  document.title = "Food share ||Home";
   return (
     <div>
       <Banner></Banner>

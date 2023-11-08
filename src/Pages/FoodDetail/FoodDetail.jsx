@@ -24,6 +24,7 @@ const FoodDetail = () => {
   // console.log();
   //   handle request food
   const handleRequestFood = (e) => {
+    document.title = "Food share ||Food Detail";
     e.preventDefault();
     const form = e.target;
     console.log(form);
