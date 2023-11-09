@@ -23,14 +23,14 @@
     },
     {
         "id": 12,
-        "foodImage": "https://i.ibb.co/SNRtJyQ/Chicken-Noodles.jpg",
-        "foodName": "Chicken Noodles",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/WWdVLqM/user3.jpg",
         "donatorName": "Olivia Martinez",
         "foodQuantity": 13,
         "pickupLocation": "Barishal, Bangladesh",
         "expiredDate": "2023-11-23",
-        "additionalNotes": "Chicken noodles with vegetables."
+        "additionalNotes": ""
     },
     {
         "id": 13,
@@ -111,14 +111,14 @@
     },
     {
         "id": 20,
-        "foodImage": "https://i.ibb.co/QMGLbpB/Fruit-Salad.jpg",
-        "foodName": "Fruit Salad",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/WWdVLqM/user3.jpg",
         "donatorName": "Sophia Smith",
         "foodQuantity": 30,
         "pickupLocation": "Chittagong, Bangladesh",
         "expiredDate": "2023-11-18",
-        "additionalNotes": "Fresh fruit salad."
+        "additionalNotes": ""
     },
     {
         "id": 21,
@@ -133,36 +133,36 @@
     },
     {
         "id": 22,
-        "foodImage": "https://i.ibb.co/vL2NN54/Fuska.jpg",
-        "foodName": "Fuska",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/CMH98hD/user1.jpg",
         "donatorName": "Rahim Khan",
         "foodQuantity": 40,
         "pickupLocation": "Chittagong, Bangladesh",
         "expiredDate": "2023-12-15",
-        "additionalNotes": "A variety of delicious fuska with different fillings."
+        "additionalNotes": ""
     },
     {
         "id": 23,
-        "foodImage": "https://i.ibb.co/hVpf270/Hilsha-Fish-Curry.jpg",
-        "foodName": "Hilsha Fish Curry",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/WWdVLqM/user3.jpg",
         "donatorName": "Parveen Sultana",
         "foodQuantity": 12,
         "pickupLocation": "Sylhet, Bangladesh",
         "expiredDate": "2023-12-28",
-        "additionalNotes": "Traditional Hilsha fish curry with rice."
+        "additionalNotes": ""
     },
     {
         "id": 24,
-        "foodImage": "https://i.ibb.co/YkSSvZx/pitha.jpg",
-        "foodName": "Pitha",
+        "foodImage": "",
+        "foodName": "",
         "donatorImage": "https://i.ibb.co/CMH98hD/user1.jpg",
         "donatorName": "Khaled Ahmed",
         "foodQuantity": 30,
         "pickupLocation": "Rajshahi, Bangladesh",
         "expiredDate": "2023-12-05",
-        "additionalNotes": "Assorted Bangladeshi pitha with sweet syrup."
+        "additionalNotes": ""
     },
     {
         "id": 25,

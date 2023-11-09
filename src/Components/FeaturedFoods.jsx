@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   Card,
   CardHeader,
@@ -20,20 +18,18 @@ const FeaturedFoods = () => {
   const axios = useAxios();
 
   const getFoods = async () => {
-    const res = await axios.get("/foods?sortField=foodQuantity&&sortOrder=desc");
+    const res = await axios.get(
+      "/foods?sortField=foodQuantity&&sortOrder=desc"
+    );
     return res;
   };
 
-  const {
-    data,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["food",],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["food"],
     queryFn: getFoods,
   });
 
-  console.log(isLoading, isError, );
+  console.log(isLoading, isError);
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 my-8">
@@ -117,13 +113,13 @@ const FeaturedFoods = () => {
                   </Tooltip>
                 </div>
                 <button className="flex items-center gap-3 cursor-pointer font-medium text-xl hover:text-[#D59B2D] bg-amber-300 px-4 py-2 rounded-lg hover:bg-[#494a4b]">
-                <Link
-                      className="flex items-center gap-3"
-                      to={`/food/${food._id}`}
-                    >
-                      <h6>More</h6>
-                      <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
-                    </Link>
+                  <Link
+                    className="flex items-center gap-3"
+                    to={`/food/${food._id}`}
+                  >
+                    <h6>More</h6>
+                    <BsArrowRight className="hover:text-[#FF3811]"></BsArrowRight>
+                  </Link>
                 </button>
               </CardFooter>
             </Card>{" "}
