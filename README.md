@@ -3,7 +3,24 @@
 ## [ Live Link](https://food-share-hub-322d3.web.app/)
 
 Click here for the Live repo: [https://food-share-hub-322d3.web.app/](https://food-share-hub-322d3.web.app/)
+Click here for the Server side repo: [https://github.com/arifu00/Food-Share-Hub-server-side]([https://food-share-hub-322d3.web.app/](https://github.com/arifu00/Food-Share-Hub-server-side))
 
+## 🎯 Using Technology
+
+### Frontend :
+- React js
+- Firebase (Authentication)
+- Java Script
+- Tailwind Css
+- Meterial Tailwind / daisy UI
+
+### Backend :
+- Express js
+- Node Js
+- MongoDB (Database)
+- Basic Js
+  
+  
 ## features and functionalities of this website
 
 - First, if the user wants any available food can be seen.
