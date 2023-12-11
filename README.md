@@ -4,7 +4,7 @@
 
 Click here for the Live repo: [https://food-share-hub-322d3.web.app/](https://food-share-hub-322d3.web.app/)
 <br />
-Click here for the Server side repo: [https://github.com/arifu00/Food-Share-Hub-server-side](https://food-share-hub-322d3.web.app/](https://github.com/arifu00/Food-Share-Hub-server-side))
+Click here for the Server side repo: [https://github.com/arifu00/Food-Share-Hub-server-side](https://github.com/arifu00/Food-Share-Hub-server-side)
 
 ## 🎯 Using Technology
 
